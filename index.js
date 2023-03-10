@@ -64,12 +64,6 @@ const vidSchema = new mongoose.Schema({
 const Vids = mongoose.model("Vid",vidSchema);
 
 app.get("/",function(req,res){
-  // Vids.find({},function(err,vids){
-  //   res.render("index",{
-  //     videos:vids
-  //   });
-  // });
-
   Vids.find().then(function(vids,err){
       res.render("index",{
         videos:vids
@@ -79,8 +73,10 @@ app.get("/",function(req,res){
 
 app.get("/vids/:vidId",function(req,res){
   const videoID = req.params.vidId;
-  Vids.findOne({_id:videoID}).then(function(vid,err){
-    res.send(vid.vidLink);
+  Vids.findById(videoID).then(vid => {
+    res.render("vid",{
+      video:vid
+    });
   });
 });
 
