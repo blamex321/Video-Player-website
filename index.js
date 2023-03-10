@@ -14,72 +14,126 @@ app.set('view engine', 'ejs');
 mongoose.connect("mongodb://127.0.0.1:27017/VidDb");
 
 const userSchema = new mongoose.Schema({
-  name:{
-    type:String,
-    required:true,
-    unique:true
+  name: {
+    type: String,
+    required: true,
+    unique: true
   },
-  email:{
-    type:String,
-    required:true,
-    unique:true
+  email: {
+    type: String,
+    required: true,
+    unique: true
   },
-  password:{
-    type:String,
-    required:true,
+  password: {
+    type: String,
+    required: true,
   },
-  image:{
-    type:String,
+  image: {
+    type: String,
   },
-},{timestamps:true});
+}, {
+  timestamps: true
+});
 
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User", userSchema);
 
 const vidSchema = new mongoose.Schema({
-  vidName:{
-    type:String,
-    required:true,
-    unique:true
+  vidName: {
+    type: String,
+    required: true,
+    unique: true
   },
-  vidThumb:{
-    type:String,
-    required:true,
-    unique:true
+  vidThumb: {
+    type: String,
+    required: true,
+    unique: true
   },
-  vidLink:{
-    type:String,
-    required:true,
-    unique:true
+  vidLink: {
+    type: String,
+    required: true,
+    unique: true
   },
-  likes:{
-    type:Number,
-    default:0
+  likes: {
+    type: Number,
+    default: 0
   },
-  views:{
-    type:Number,
-    default:0
+  views: {
+    type: Number,
+    default: 0
   },
 });
 
-const Vids = mongoose.model("Vid",vidSchema);
+const Vids = mongoose.model("Vid", vidSchema);
 
-app.get("/",function(req,res){
-  Vids.find().then(function(vids,err){
-      res.render("index",{
-        videos:vids
-      });
-  });
-});
-
-app.get("/vids/:vidId",function(req,res){
-  const videoID = req.params.vidId;
-  Vids.findById(videoID).then(vid => {
-    res.render("vid",{
-      video:vid
+app.get("/", function(req, res) {
+  Vids.find().then(function(vids, err) {
+    res.render("index", {
+      videos: vids
     });
   });
 });
 
-app.listen(3000,function(){
+// app.get("/like/:vidId", function(req, res) {
+//   const requestedVidId = req.params.vidId;
+//   Vids.updateOne({
+//     _id: requestedVidId
+//   }, {
+//     $inc: {
+//       likes: 1
+//     }
+//   }, {
+//     new: true
+//   }, function(err, vid) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.redirect("/" + requestedVidId);
+//     }
+//   });
+// });
+
+
+app.get("/:vidId", function(req, res) {
+  const videoID = req.params.vidId;
+  if (videoID.match(/^[0-9a-fA-F]{24}$/)) {
+    // Yes, it's a valid ObjectId, proceed with `findById` call.
+    Vids.findOne({
+      _id: videoID
+    }).then(async function(vid, err) {
+      if (err) {
+        console.log(err);
+      } else {
+        Vids.updateOne({
+          _id: videoID
+        }, {
+          $inc: {
+            views: 1
+          }
+        }, {
+          new: true
+        }, function(err, vid) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(vid);
+          }
+        });
+        res.render("vid", {
+          video: await vid
+        });
+
+      }
+    });
+  } else {
+    console.log("not an id");
+  }
+});
+
+
+app.get("/signIn", function(req, res) {
+  res.render("signIn");
+});
+
+app.listen(3000, function() {
   console.log("Server Started");
 });

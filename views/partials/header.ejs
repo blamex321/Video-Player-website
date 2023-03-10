@@ -20,14 +20,15 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sign In</a>
-            </li>
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="buttons btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
+          <form class="d-flex" action="/signIn" method="get">
+            <button class="buttons btn btn-outline-primary" type="submit">Sign In</button>
+          </form>
+
         </div>
       </div>
     </nav>

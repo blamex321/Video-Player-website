@@ -6,7 +6,7 @@
     preload="auto"
     width="640"
     height="264"
-    poster="MY_VIDEO_POSTER.jpg"
+    poster="<%= video.vidThumb %>"
     data-setup="{}"
   >
     <source src="<%= video.vidLink %>" type="video/mp4" />
@@ -18,9 +18,10 @@
       >
     </p>
   </video>
+  <!-- <form class="" action="/like/<%= video._id %>" method="get">
+    <button type="submit" class ="btn btn-primary"name="button"><i class="fa-solid fa-heart"></i></button>
+  </form> -->
 
-
-<!-- 
-<iframe width="1020" height="815" src= "<%= video.vidLink %>" ></iframe>
-<script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script> -->
+<script src="https://kit.fontawesome.com/231bca5e25.js" crossorigin="anonymous"></script>
+<script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
 <%- include('partials/footer'); -%>
