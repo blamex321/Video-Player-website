@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
-mongoose.connect("mongodb://127.0.0.1:27017/VidDb");
+mongoose.connect("mongodb+srv://admin-laxman:test123admin@sample.jj2m4ux.mongodb.net/VidDb?retryWrites=true&w=majority");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -73,24 +73,24 @@ app.get("/", function(req, res) {
   });
 });
 
-// app.get("/like/:vidId", function(req, res) {
-//   const requestedVidId = req.params.vidId;
-//   Vids.updateOne({
-//     _id: requestedVidId
-//   }, {
-//     $inc: {
-//       likes: 1
-//     }
-//   }, {
-//     new: true
-//   }, function(err, vid) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.redirect("/" + requestedVidId);
-//     }
-//   });
-// });
+app.get("/like/:vidId", function(req, res) {
+  const requestedVidId = req.params.vidId;
+  Vids.updateOne({
+    _id: requestedVidId
+  }, {
+    $inc: {
+      likes: 1
+    }
+  }, {
+    new: true
+  }, function(err, vid) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/" + requestedVidId);
+    }
+  });
+});
 
 
 app.get("/:vidId", function(req, res) {
@@ -130,10 +130,10 @@ app.get("/:vidId", function(req, res) {
 });
 
 
-app.get("/signIn", function(req, res) {
+app.post("/signIn", function(req, res) {
   res.render("signIn");
 });
 
-app.listen(3000, function() {
+app.listen(3000 || process.env.PORT, function() {
   console.log("Server Started");
 });

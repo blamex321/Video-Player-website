@@ -2,14 +2,14 @@
 <div class="row">
   <% videos.forEach(function(vid,index){ %>
   <div class="card col-lg-4 col-md-4" style="width: 18rem;">
-    <img src="<%=vid.vidThumb %>" alt="..." class="card-img-top">
+    <img class="im" src="<%=vid.vidThumb %>" alt="..." class="card-img-top">
     <div class="card-body">
       <h5 class="card-title"><%=vid.vidName %></h5>
       <div class="details-div">
       <i class="fa-solid fa-heart"></i>
       <p><%= vid.likes %></p>
       <label for="">views</label>
-      <p class= "bg-light"><%= vid.views %></p>
+      <p class= ""><%= vid.views %></p>
       </div>
       <a href="/<%=vid._id%>" class="btn btn-primary">Go somewhere</a>
     </div>

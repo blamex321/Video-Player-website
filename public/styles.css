@@ -1,3 +1,50 @@
+.body{
+  background-color: #C0EEF2;
+}
+
 .buttons{
   margin: 3px;
+}
+
+.card-body{
+  background-color: beige;
+  padding-left: 30px;
+  margin: 20px 20px 20px 20px;
+}
+
+.card-title{
+  font-family: cursive;
+  margin: 20px 20px 20px 20px;
+}
+
+.im{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.row{
+  height: 0px;
+  background-color: #E9EDC9;
+  margin: 10px 25%;
+}
+
+.navbar-brand{
+  font-family: sans-serif;
+}
+
+.nav-link active{
+  font-family: sans-serif;
+}
+
+.container-fluid{
+  margin: 5px 5px 5px 5px;
+}
+
+.video-js{
+  margin-top: 20px;
+  align-items: center;
+}
+
+.lk{
+ padding-left: 270px;
 }

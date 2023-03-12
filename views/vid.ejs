@@ -1,11 +1,13 @@
 <%- include('partials/header'); -%>
+<center>
+
 <video
     id="my-video"
     class="video-js"
     controls
     preload="auto"
-    width="640"
-    height="264"
+    width="720"
+    height="480"
     poster="<%= video.vidThumb %>"
     data-setup="{}"
   >
@@ -18,9 +20,10 @@
       >
     </p>
   </video>
-  <!-- <form class="" action="/like/<%= video._id %>" method="get">
+  </center>
+  <form class="lk" action="/like/<%= video._id %>" method="get" style="padding-left: 280px">
     <button type="submit" class ="btn btn-primary"name="button"><i class="fa-solid fa-heart"></i></button>
-  </form> -->
+  </form>
 
 <script src="https://kit.fontawesome.com/231bca5e25.js" crossorigin="anonymous"></script>
 <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
